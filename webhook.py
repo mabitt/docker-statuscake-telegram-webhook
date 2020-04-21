@@ -14,6 +14,7 @@ TELEGRAM_CHAT_ID = os.environ.get('TELEGRAM_CHAT_ID')
 bot_url = 'https://api.telegram.org/bot' + TELEGRAM_BOT_TOKEN + '/sendMessage'
 
 SC_API_TOKEN = os.environ.get('SC_API_TOKEN')
+logging.info('Autorized Token: %s' % SC_API_TOKEN)
 
 #SC_USER = os.environ('SC_USER')
 #SC_APIKEY = os.environ('SC_APIKEY')
