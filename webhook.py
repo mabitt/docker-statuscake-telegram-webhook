@@ -13,15 +13,15 @@ TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
 TELEGRAM_CHAT_ID = os.environ.get('TELEGRAM_CHAT_ID')
 bot_url = 'https://api.telegram.org/bot' + TELEGRAM_BOT_TOKEN + '/sendMessage'
 
-SC_API_TOKEN = os.environ.get('SC_API_TOKEN')
-logging.info('Autorized Token: %s' % SC_API_TOKEN)
+#SC_API_TOKEN = os.environ.get('SC_API_TOKEN')
+#logging.info('Autorized Token: %s' % SC_API_TOKEN)
 
-#SC_USER = os.environ('SC_USER')
-#SC_APIKEY = os.environ('SC_APIKEY')
-#webhook_token_str = '%s%s' % (SC_USER, SC_APIKEY)
-#logging.info('Text to Hash: %s' % webhook_token_str)
-#webhook_token = hashlib.md5(webhook_token_str.encode())
-#logging.info('Autorized Token: %s' % webhook_token.hexdigest())
+SC_USER = os.environ('SC_USER')
+SC_APIKEY = os.environ('SC_APIKEY')
+webhook_token_str = '%s%s' % (SC_USER, SC_APIKEY)
+logging.info('Text to Hash: %s' % webhook_token_str)
+webhook_token = hashlib.md5(webhook_token_str.encode())
+logging.info('Autorized Token: %s' % webhook_token.hexdigest())
 
 app = Flask(__name__)
 turl = pycurl.Curl() 
@@ -41,7 +41,7 @@ def webhook():
         logging.info('Received Token: %s' % sc_token)
         sc_text = '%s - %s' % (sc_name, sc_status)
         logging.info('Text: %s' % sc_text)
-        if sc_token == SC_API_TOKEN:
+        if sc_token == webhook_token.hexdigest():
             telegram_data = '{"chat_id": "%s" , "text": "%s"}' % (TELEGRAM_CHAT_ID, sc_text)
             turl.setopt(turl.HTTPHEADER, ['Accept: */*',
                                           'Content-Type: application/json'])

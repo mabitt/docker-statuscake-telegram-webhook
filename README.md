@@ -6,7 +6,8 @@ Usage:
 
 ```sh
 docker run \
--e SC_API_TOKEN='StatusCake Token' \
+-e SC_USER='username (lowercase) ' \
+-e SC_APIKEY='apikey' \
 -e TELEGRAM_BOT_TOKEN='0000000:key' \
 -e TELEGRAM_CHAT_ID='user or group id' \
 -p 5000:5000 \
