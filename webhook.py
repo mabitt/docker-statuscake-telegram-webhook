@@ -21,7 +21,7 @@ logging.info('Autorized Token: %s' % SC_API_TOKEN)
 #webhook_token_str = '%s%s' % (SC_USER, SC_APIKEY)
 #logging.info('Text to Hash: %s' % webhook_token_str)
 #webhook_token = hashlib.md5(webhook_token_str.encode())
-logging.info('Autorized Token: %s' % webhook_token.hexdigest())
+#logging.info('Autorized Token: %s' % webhook_token.hexdigest())
 
 app = Flask(__name__)
 turl = pycurl.Curl() 
