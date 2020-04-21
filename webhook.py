@@ -9,15 +9,18 @@ from flask import Flask, request, abort, jsonify
 LOGLEVEL = os.environ.get('LOGLEVEL', 'WARNING').upper()
 logging.basicConfig(level=LOGLEVEL)
 
-TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
-TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
+TELEGRAM_BOT_TOKEN = os.environ('TELEGRAM_BOT_TOKEN')
+TELEGRAM_CHAT_ID = os.environ('TELEGRAM_CHAT_ID')
 bot_url = 'https://api.telegram.org/bot' + TELEGRAM_BOT_TOKEN + '/sendMessage'
-SC_USER = os.getenv('SC_USER')
-SC_APIKEY = os.getenv('SC_APIKEY')
-webhook_token_str = '%s%s' % (SC_USER, SC_APIKEY)
-logging.info('Text to Hash: %s' % webhook_token_str)
-webhook_token = hashlib.md5(webhook_token_str.encode())
-logging.info('Autorized Token: %s' % webhook_token.hexdigest())
+
+SC_API_TOKEN = os.environ('SC_API_TOKEN')
+
+#SC_USER = os.environ('SC_USER')
+#SC_APIKEY = os.environ('SC_APIKEY')
+#webhook_token_str = '%s%s' % (SC_USER, SC_APIKEY)
+#logging.info('Text to Hash: %s' % webhook_token_str)
+#webhook_token = hashlib.md5(webhook_token_str.encode())
+#logging.info('Autorized Token: %s' % webhook_token.hexdigest())
 
 app = Flask(__name__)
 turl = pycurl.Curl() 
@@ -37,7 +40,7 @@ def webhook():
         logging.info('Received Token: %s' % sc_token)
         sc_text = '%s - %s' % (sc_name, sc_status)
         logging.info('Text: %s' % sc_text)
-        if sc_token == webhook_token.hexdigest():
+        if sc_token == SC_API_TOKEN:
             telegram_data = '{"chat_id": "%s" , "text": "%s"}' % (TELEGRAM_CHAT_ID, sc_text)
             turl.setopt(turl.HTTPHEADER, ['Accept: */*',
                                           'Content-Type: application/json'])

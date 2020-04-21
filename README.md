@@ -6,9 +6,7 @@ Usage:
 
 ```sh
 docker run \
--e LOGLEVEL='INFO' \
--e SC_USER='StatusCake username' \
--e SC_APIKEY='StatusCake APIKEY' \
+-e SC_API_TOKEN='StatusCake Token' \
 -e TELEGRAM_BOT_TOKEN='0000000:key' \
 -e TELEGRAM_CHAT_ID='user or group id' \
 -p 5000:5000 \
