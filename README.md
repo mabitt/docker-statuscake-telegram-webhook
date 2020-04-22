@@ -11,6 +11,7 @@ docker run \
 -e TELEGRAM_BOT_TOKEN='0000000:key' \
 -e TELEGRAM_CHAT_ID='user or group id' \
 -p 5000:5000 \
+mabitt/statuscake-telegram-webhook
 ```
 
 To debug, add:
