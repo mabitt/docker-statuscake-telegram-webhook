@@ -1,4 +1,4 @@
-FROM python:3.8-buster
+FROM python:3.9-buster
 MAINTAINER MAB <mab@mab.net>
 # Keep image updated
 ENV REFRESHED_AT 2020-04-20-00-00Z
